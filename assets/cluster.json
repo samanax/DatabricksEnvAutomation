@@ -1,0 +1,9 @@
+{
+    "cluster_name": "main-cluster",
+    "spark_version": "6.4.x-scala2.11",
+    "autoscale": {
+        "min_workers": 1,
+        "max_workers": 4
+    },
+    "instance_pool_id": "FROM_EXTERNAL_SOURCE"
+}

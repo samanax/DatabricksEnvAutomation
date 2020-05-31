@@ -1,0 +1,41 @@
+parameters:
+  project: ""
+  workspace: ""
+  dependsOn: []
+
+jobs:
+  - job: apply_databricks_scripts
+    displayName: Apply Databricks scripts
+    pool:
+      vmImage: ubuntu-16.04
+    variables:
+      - group: shared
+      - group: development
+    ${{ if parameters.dependsOn }}:
+      dependsOn: ${{ parameters.dependsOn }}
+    steps:
+      - task: UsePythonVersion@0
+        inputs:
+          versionSpec: "3.6"
+
+      - bash: |
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install databricks-cli
+
+          databricks --version
+        displayName: Install Databricks CLI
+
+      - bash: |
+          cat >~/.databrickscfg <<EOL
+          [DEFAULT]
+          host = https://westeurope.azuredatabricks.net
+          token = $(DATABRICKS_TOKEN)
+          EOL
+        displayName: Configure Databricks CLI
+
+      - task: ShellScript@2
+        inputs:
+          workingDirectory: $(Build.SourcesDirectory)/assets/databricks
+          scriptPath: $(Build.SourcesDirectory)/assets/databricks/setup.sh
+          args: ${{ parameters.project }}-${{ parameters.workspace }} # TODO: Handle arguments in the script
+        displayName: Setup Databricks

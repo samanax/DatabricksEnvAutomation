@@ -1,0 +1,7 @@
+{
+    "instance_pool_name": "main-pool",
+    "node_type_id": "Standard_D3_v2",
+    "min_idle_instances": 2,
+    "idle_instances": 2,
+    "idle_instance_auto_termination": 60
+}

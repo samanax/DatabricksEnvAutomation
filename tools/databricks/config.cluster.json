@@ -1,0 +1,25 @@
+{
+    "cluster_name": "CLUSTER_NAME",
+    "instance_pool_id": "POOL_ID",
+    "spark_version": "6.0.x-scala2.11",
+    "spark_conf": {
+        "spark.sql.execution.arrow.enabled": "true"
+    },
+    "node_type_id": "Standard_DS3_v2",
+    "num_workers": 1,
+    "ssh_public_keys": [],
+    "custom_tags": {
+        "Project": "DevOpsIntegration"
+    },
+    "cluster_log_conf": {
+        "dbfs": {
+            "destination": "dbfs:/cluster_logs"
+        }
+    },
+    "spark_env_vars": {
+        "PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+    },
+    "autotermination_minutes": 120,
+    "enable_elastic_disk": false,
+    "init_scripts": []
+}
