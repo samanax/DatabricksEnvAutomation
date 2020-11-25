@@ -37,7 +37,7 @@ CLUSTER_NAME=$(cat $CLUSTER_JSON_FILE | jq -r  '.cluster_name')
 
 # Cluster already exists
 if [[ " ${arr[@]} " =~ $CLUSTER_NAME ]]; then
-    echo 'The cluster is already created for Planmeca, skipping the cluster operation.'
+    echo 'The cluster is already created, skipping the cluster operation.'
     exit 0
 fi
 
